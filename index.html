@@ -1,0 +1,753 @@
+<html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap' rel='stylesheet' type='text/css'>
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+        <!--Display Coffee-->
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+*{
+    box-sizing: border-box;
+}
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-family: Poppins;
+    background: #cebca6;
+}
+@media screen and (max-height: 500px) { body > * { scale: 0.8 };}
+@media screen and (max-height: 430px) { 
+    body > * { scale: 0.7 } 
+    .options { translate: 259px 2px !important;}
+}
+
+.wrapper {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-user-select: none;
+    -ms-user-select: none; 
+    user-select: none;
+}
+.shadow {
+    position: absolute;
+    top: 69.7%;
+    left: 12%;
+    width: 55%;
+    height: 22px;
+    border-radius: 50%;
+    box-shadow: 
+    inset 0 0 0 100px rgba(0,0,0, 0.05);
+    background:
+    repeating-linear-gradient( -45deg, #0002, #0002 1px, #0000 1px, #0000 3px),
+    repeating-linear-gradient( 45deg, #0002, #0002 1px, #0000 1px, #0000 3px );
+} 
+.title {
+    height: fit-content;
+    width: fit-content;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom:7%;
+    margin: auto;
+    display: flex;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    
+    
+    font-size: 20px;
+    text-shadow: 
+    0 0 3px rgba(255,255,255, 0.5), 
+    0 0px 1px rgba(0,0,0, 0.7);
+}
+.cup {
+    width: 160px;
+    height: 162px;
+    position: relative;
+}
+.contents {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    background: rgba(247, 247, 247, 0.9);
+    clip-path: path('m 0 0 q 4.59 145.8 34.425 155.52 c 29.835 8.1 68.85 8.1 96.39 0 q 29.835 -9.72 29.835 -155.52 C 143 11 16 13 0 0 Z');
+}
+.contents::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    box-shadow: 
+    inset -18px 0px 4px -10px rgba(255,255,255, 0.7),
+    inset 42px -22px 12px -10px rgba(0,0,0, 0.03),
+    inset 0 -22px 12px -10px rgba(0,0,0, 0.2),
+    inset 20px 0 10px -10px rgba(0,0,0, 0.2);
+}
+.cup::before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 2;
+    top: -10px;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(63deg, rgba(253, 253, 253, 0.7) 9%, rgba(238, 238, 238, 0.7) 100%);
+    border-radius: 50%;
+    box-shadow: 
+    0 1px 2px 0px rgba(0,0,0, 0.05),
+    inset 0 0 1px 2px rgba(0,0,0, 0.05);
+}
+.cup::after {
+    content: '';
+    background: #fff;
+    width: 0%;
+    height: 0%;
+    scale: 1.15 0.7;
+    transform-origin: 0% 0%;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+}
+
+.contents :is(.foam, .cream, .steamed-milk, .milk, .chocolate, .sugar, .whiskey, .water, .gelato, .espresso, .coffee) {
+    width: 100%;
+    height: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50% / 20%;
+    font-size: 12px;
+    transition: all 1s ease-in-out;
+    opacity: 0.94;
+    position: relative;
+    margin-top: 0;
+    padding-top: 0;
+    color: rgba(0,0,0, 0);
+    margin: 0 auto;
+}
+.contents :is(.foam, .cream, .steamed-milk, .milk, .chocolate, .sugar, .whiskey, .water, .espresso, .coffee)::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 26px;
+    border-radius: 50%;
+    position: absolute;
+    top: -10%;
+    transition: all 1s ease-in-out;
+    opacity: 0.1;
+    background: white;
+    z-index: inherit; 
+}
+.contents :is(.foam, .cream, .steamed-milk, .milk)::before {
+    background: rgb(141, 141, 141);
+}
+
+.contents .foam { background: #ffffff; z-index: 12;}
+.contents .cream { background: #fffbe7; z-index: 11;}
+.contents .steamed-milk { background: #fffcf8; z-index: 10;}
+.contents .milk { background: #f8f2e8; z-index: 9;}
+.contents .chocolate { background: #47260a; z-index: 8;}
+.contents .sugar { background: #ffffff; z-index: 7;}
+.contents .whiskey {background: rgba(207, 129, 39, 0.8); color: #fff; z-index: 6;}
+.contents .water { background: #e5f7ff; z-index: 5;}
+.contents .coffee { background: #5a341a; z-index: 4;}
+.contents .gelato { background: #fcf9ea; z-index: 4;}
+.contents .espresso { background: #462814; z-index: 3;}
+.contents .espresso span { display: none;}
+
+
+/* Black Coffee */
+.black .coffee {
+    height: 90%;
+    border-radius: 50% / 10%;
+    padding-top: 0px;
+
+    color: rgba(255,255,255, 1);
+}
+.black .coffee::before {
+    opacity: 0.1;
+    background: white;
+    top: 0%;
+}
+
+/* Latte */
+.latte .espresso {
+    color: rgba(255,255,255, 1);
+    height: 30%;
+    padding-top: 12px;
+    margin-top: -20px;
+}
+.latte .steamed-milk {
+    color: rgba(0,0,0, 1);
+    height: 60%;
+    margin-top: -20px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.latte .foam {
+    color: rgba(0,0,0, 1);
+    height: 24%;
+    padding-top: 22px;
+    border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+    border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.latte .foam::before {
+    background: #faf8f5;
+    border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+    opacity: 1;
+}
+
+
+/* Flat White */
+.flat-white .espresso {
+    color: rgba(255,255,255, 1);
+    height: 40%;
+    margin-top: -21px;
+    padding-top: 20px;
+}
+.flat-white .espresso::before {
+    background: none;
+}
+.flat-white .steamed-milk {
+    color: rgba(0,0,0, 1);
+    height: 40%;
+    margin-top: -20px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.flat-white .steamed-milk::before {
+    background: #faf8f5;
+    border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+    opacity: 1;
+}
+
+/* Cappuccino */
+.cappuccino .espresso {
+    color: rgba(255,255,255, 1);
+    height: 30%;
+    margin-top: -20px;
+    padding-top: 20px;
+}
+.cappuccino .espresso::before {
+    top: -33%;
+}
+.cappuccino .steamed-milk {
+    color: rgba(0,0,0, 1);
+    height: 30%;
+    margin-top: -20px;
+    padding-top: 20px;
+}
+.cappuccino .foam {
+    color: rgba(0,0,0, 1);
+    height: 40%;
+    padding-top: 20px;
+    border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+    border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.cappuccino .foam::before {
+    background: #faf8f5;
+    border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+    opacity: 1;
+}
+
+/* Americano */
+.americano .water {
+    color: rgba(0,0,0, 1);
+    height: 60%;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.americano .water::before{
+    background: #eff9fd;
+    border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+    opacity: 1;
+    top: 0;
+}
+.americano .espresso {
+    color: rgba(255,255,255, 1);
+    height: 30%;
+    margin-top: -20px;
+    padding-top: 20px;
+}
+
+/* Espresso */
+.cup.espresso .espresso {
+    color: rgba(255,255,255, 1);
+    height: 30%;
+    margin-top: -20px;
+    padding-top: 20px;
+}
+.cup.espresso .espresso::before{
+    background: #9e4a12;
+    opacity: 0.4;
+}
+
+/* Doppio */
+.doppio .espresso {
+    color: rgba(255,255,255, 1);
+    height: 40%;
+    padding-top: 10px;
+}
+.doppio .espresso::before{
+    background: #9e4a12;
+    opacity: 0.4;
+}
+.doppio .espresso span {
+    display: contents;
+}
+
+/* Cortado */
+.cortado .steamed-milk {
+    color: rgba(0,0,0, 1);
+    height: 30%;
+    margin-top: -20px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.cortado .steamed-milk::before {
+    background: #faf8f5;
+    border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+    opacity: 1;
+}
+.cortado .espresso {
+    color: rgba(255,255,255, 1);
+    height: 30%;
+    margin-top: -20px;
+    padding-top: 20px;
+}
+
+/* Macchiato */
+.macchiato .foam::before {
+    background: #faf8f5;
+    border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+    opacity: 1;
+}
+.macchiato .foam {
+    color: rgba(0,0,0, 1);
+    height: 30%;
+    margin-top: -20px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.macchiato .espresso {
+    color: rgba(255,255,255, 1);
+    height: 30%;
+    margin-top: -20px;
+    padding-top: 20px;
+}
+
+/* Mocha */
+.mocha .steamed-milk {
+    color: rgba(0,0,0, 1);
+    height: 40%;
+    margin-top: -20px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.mocha .steamed-milk::before {
+    background: #faf8f5;
+    border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+    opacity: 1;
+}
+.mocha .chocolate {
+    color: rgba(255,255,255, 1);
+    height: 25%;
+    margin-top: -20px;
+    padding-top: 20px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
+}
+.mocha .espresso {
+    color: rgba(255,255,255, 1);
+    height: 40%;
+    margin-top: -21px;
+    padding-top: 20px;
+}
+.mocha .espresso::before {
+    background: none;
+}
+
+/* Affogato */
+.affogato .gelato {
+    opacity: 1;
+    color: rgba(0,0,0, 1);
+    height: 30%;
+    padding-top: 10px;
+    width: 60%;
+    border-radius: 100% 100% 50% 50%;
+    border: 1px dashed rgba(75,75,75, 0.5);
+    border-bottom: none;
+}
+.affogato .espresso {
+    margin-top: -16px;
+    color: rgba(255,255,255, 1);
+    height: 30%;
+    padding-top: 10px;
+}
+.affogato .espresso::before{
+    background: #9e4a12;
+    opacity: 0.4;
+}
+
+/* Con Panna */
+.con-panna .cream {
+    color: rgba(0,0,0, 1);
+    height: 24%;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.con-panna .cream::before {
+    background: #fcf9ea;
+    border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+    opacity: 1;
+}
+.con-panna .espresso {
+    margin-top: -16px;
+    color: rgba(255,255,255, 1);
+    height: 40%;
+    padding-top: 10px;
+}
+.con-panna .espresso::before {
+    opacity: 0;
+}
+
+/* Cafe Au Lait */
+.cafe-au-lait .steamed-milk {
+    color: rgba(0,0,0, 1);
+    height: 50%;
+    padding-top: 10px;
+    border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.cafe-au-lait .steamed-milk::before {
+    background: #faf8f5;
+    border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+    opacity: 1;
+}
+.cafe-au-lait .coffee {
+    margin-top: -16px;
+    color: rgba(255,255,255, 1);
+    height: 50%;
+    padding-top: 10px;
+}
+
+/* Irish */
+.irish .cream {
+    color: rgba(0,0,0, 1);
+    height: 24%;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(75, 75, 75, 0.3);
+}
+.irish .cream::before {
+    background: #fcf9ea;
+    border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+    opacity: 1;
+}
+.irish .sugar {
+    color: rgba(0,0,0, 1);
+    height: 22%;
+    margin-top: -20px;
+    padding-top: 20px; 
+}
+.irish .sugar::before {
+    background: #fcf9ea;
+    border-bottom: 1px dashed rgba(75, 75, 75, 0.5);
+    opacity: 1;
+}
+.irish .whiskey {
+    color: rgba(255,255,255, 1);
+    height: 30%;
+    margin-top: -18px;
+    padding-top: 10px;
+}
+.irish .coffee {
+    margin-top: -18px;
+    color: rgba(255,255,255, 1);
+    height: 40%;
+    padding-top: 10px;
+}
+.irish .coffee::before {
+    opacity: 0;
+}
+
+
+        </style>
+        <!--List of Coffee-->
+        <style>
+.list-wrap label {
+  float:left;
+  color:#462814;
+  font-family: "Pacifico";
+  font-size: larger;
+}
+.search-box {
+  float:left;
+  clear:left;
+  width:70%;
+  padding:0.4em;
+  font-size:1em;
+  color:#555;
+}
+
+.list-count {
+  float:left;
+  text-align:center;
+  width:30%;
+  padding:0.5em;
+  color: brown;
+  font-weight: bold;
+  font-family: "Dancing Script";
+}
+
+
+
+li {
+  transition-property: margin, background-color, border-color;
+  transition-duration: 1s, .5s, .5s;
+  transition-timing-function: ease-in-out, ease, ease;
+}
+
+.empty-item {
+  transition-property: opacity;
+  transition-duration: 0s;
+  transition-delay: 0s;
+  transition-timing-function: ease;
+}
+
+.empty .empty-item {
+  transition-property: opacity;
+  transition-duration: .2s;
+  transition-delay: .3s;
+  transition-timing-function: ease;
+}
+
+.hiding {
+  margin-left:-100%;
+  opacity:0.5;
+}
+
+.hidden {
+  display:none;
+}
+
+#list {
+  float:left;
+  width:100%;
+  margin:2em 0;
+  padding:0;
+  position:relative;
+}
+
+#list:before {
+  content:'Coffee';
+  position:absolute;
+  left:-2.8em;
+  font-size:3em;
+  text-align:right;
+  top:1.5em;
+  color:#ededed;
+  font-weight:bold;
+  font-family: 'Dancing Script', sans-serif;
+  transform:rotate(-90deg);
+}
+
+#list::-webkit-scrollbar{
+    display: none;
+}
+
+li.in {
+  float:left;
+  clear:left;
+  width:100%;
+  margin:0.2em 0;
+  padding:0.5em 0.8em;
+  list-style:none;
+  background-color:#f2f2f2;
+  border-left:5px solid #543310;
+  cursor:pointer;
+  color:#333;
+  position:relative;
+  z-index:2;
+}
+
+li.in:hover {
+  background-color:#f9f9f9;
+  border-color:green;
+}
+
+.empty-item {
+  background:none;
+  color: brown;
+  font-family: "Pafico";
+  margin:0.2em 0;
+  padding:0.5em 0.8em;
+  font-style:italic;
+  border:none;
+  text-align:center;
+  visibility:hidden;
+  opacity:0;
+  float:left;
+  clear:left;
+  width:100%;
+}
+
+.empty .empty-item {
+  opacity:1;
+  visibility:visible;
+}
+        </style>
+    </head>
+    <body translate="no">
+        <div class="container" style="padding-top: 30px;">
+            <div class=" d-inline-flex">
+                <img src="https://static.vecteezy.com/system/resources/previews/026/721/100/original/coffee-beans-hand-drawing-sketch-engraving-illustration-style-png.png" alt="coffee beans image" width="100">
+                <div class="row">
+                <div class="" style="font-family: 'Pacifico'; font-size: 3rem; color: green;">Một cốc café</div>
+                <div class="" style="font-family: 'Pacifico'; font-size: 1rem; color: #6F4E37;">Còn gì tuyệt hơn 1 ngày mới bằng 1 cốc café?</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 p-5 d-flex align-items-center">
+                    <div class="wrapper">
+                        <div class="shadow"></div>
+                        <div class="title">Latte</div>
+                        <div class="cup latte">
+                        <div class="contents">
+                            <div class="gelato">gelato</div>
+                            <div class="foam">milk foam</div>
+                            <div class="cream">cream</div>
+                            <div class="steamed-milk">steamed milk</div>
+                            <div class="milk">milk</div>
+                            <div class="chocolate">chocolate</div>
+                            <div class="sugar">sugar</div>
+                            <div class="whiskey">whiskey</div>
+                            <div class="water">water</div>
+                            <div class="coffee">coffee</div>
+                            <div class="espresso"><span>(2)&nbsp;</span> espresso</div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-8 p-5">
+                    <section class="list-wrap">
+                        <label for="search-text">Danh sách các loại café</label>
+                        <input type="text" id="search-text" placeholder="Tên café" class="search-box">
+                        <span class="list-count"></span>
+                        <ul id="list" class="overflow-y-scroll" style="height: 55vh; overflow-y: scroll; overflow-x: hidden;">
+                            <li class="in">Black</li>
+                            <li class="in">Doppio</li>
+                            <li class="in">Americano</li>
+                            <li class="in">Latte</li>
+                            <li class="in">Cafe Au Lait</li>
+                            <li class="in">Irish</li>
+                            <li class="in">Con Panna</li>
+                            <li class="in">Macchiato</li>
+                            <li class="in">Affogato</li>
+                            <li class="in">Cortado</li>
+                            <li class="in">Espresso</li>
+                            <li class="in">Cappuccino</li>
+                            <li class="in">Flat White</li>
+                            <li class="in">Mocha</li>
+                            <span class="empty-item">Không có kết quả</span>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!--Display coffee-->
+    <script>
+        let options = document.querySelectorAll("#list .in");
+        let cup = document.querySelector(".cup");
+        let title = document.querySelector(".title");
+
+        function formatOption(option) {
+            return option.toLowerCase().replace(/\s/g, "-");
+        }
+
+        function display_ingredients(type_of_coffee){
+            console.log(type_of_coffee)
+            // $("." + type_of_coffee + " .contents .coffee").css({"height": "90%"});
+        }
+
+        options.forEach((option) => {
+            option.addEventListener("click", function() {
+                options.forEach((opt) => {
+                    cup.classList.remove(formatOption(opt.textContent));
+                });
+                cup.classList.add(formatOption(this.textContent));
+                display_ingredients(formatOption(this.textContent))
+                title.innerHTML = this.textContent;
+            });
+        });
+    </script>
+    <!--List of coffee-->
+    <script>
+        $(document).ready(function() {
+
+        var jobCount = $('#list .in').length;
+        $('.list-count').text(jobCount + ' kết quả');
+        
+
+        $("#search-text").keyup(function () {
+        //$(this).addClass('hidden');
+
+        var searchTerm = $("#search-text").val();
+        var listItem = $('#list').children('li');
+
+        
+        var searchSplit = searchTerm.replace(/ /g, "'):containsi('")
+        
+            //extends :contains to be case insensitive
+        $.extend($.expr[':'], {
+        'containsi': function(elem, i, match, array)
+        {
+        return (elem.textContent || elem.innerText || '').toLowerCase()
+        .indexOf((match[3] || "").toLowerCase()) >= 0;
+        }
+        });
+        
+        
+        $("#list li").not(":containsi('" + searchSplit + "')").each(function(e)   {
+            $(this).addClass('hiding out').removeClass('in');
+            setTimeout(function() {
+                $('.out').addClass('hidden');
+            }, 300);
+        });
+        
+        $("#list li:containsi('" + searchSplit + "')").each(function(e) {
+            $(this).removeClass('hidden out').addClass('in');
+            setTimeout(function() {
+                $('.in').removeClass('hiding');
+            }, 1);
+        });
+        
+
+            var jobCount = $('#list .in').length;
+        $('.list-count').text(jobCount + ' kết quả');
+        
+        //shows empty state text when no jobs found
+        if(jobCount == '0') {
+            $('#list').addClass('empty');
+        }
+        else {
+            $('#list').removeClass('empty');
+        }
+        
+        });                
+        });
+    </script>
+</html>
